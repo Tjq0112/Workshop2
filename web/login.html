@@ -1,0 +1,130 @@
+<!-- web/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form id="loginForm">
+    <h1>Login</h1>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <button type="button" onclick="validateLogin()">Login</button>
+    <p id="loadingMessage" style="display: none;">Logging in...</p>
+    <p id="errorMessage"></p>
+</form>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+<script>
+    // Replace these values with your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC_AbVPkhf-nnGlo0EQ-gR2-drm5Mp8JJI",
+            authDomain: "workshop-2-26086.firebaseapp.com",
+            projectId: "workshop-2-26086",
+            storageBucket: "workshop-2-26086.appspot.com",
+            messagingSenderId: "339922420964",
+            appId: "1:339922420964:web:ec3040f3a787a2c48e18f1"
+        };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    function validateLogin() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Display loading message
+        document.getElementById("loadingMessage").style.display = "block";
+        document.getElementById("errorMessage").innerText = "";
+
+        // Use Firebase Firestore to check credentials
+        const db = firebase.firestore();
+        const adminRef = db.collection("Admin").doc("A01");
+
+        adminRef.get().then((doc) => {
+            if (doc.exists) {
+                const storedUsername = doc.data().username;
+                const storedPassword = doc.data().password;
+
+                if (username === storedUsername && password === storedPassword) {
+                    alert("Login successful!");
+                    // Redirect to the admin menu page
+                    window.location.href = "map_page.html";
+                } else {
+                    displayError("Invalid username or password");
+                }
+            } else {
+                displayError("Admin data not found");
+            }
+        }).catch((error) => {
+            console.error("Error getting admin data: ", error);
+            displayError("Error during login");
+        }).finally(() => {
+            // Hide loading message regardless of success or failure
+            document.getElementById("loadingMessage").style.display = "none";
+        });
+    }
+
+    function displayError(message) {
+        document.getElementById("errorMessage").innerText = message;
+    }
+</script>
+</body>
+</html>
