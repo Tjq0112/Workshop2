@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 //import 'package:intl/intl.dart';
-import 'package:mockapp/user/controller/bin_controller.dart';
-import 'package:mockapp/user/controller/schedule_controller.dart';
-import 'package:mockapp/user/view/bin_register.dart';
-import 'package:mockapp/user/view/bin_update.dart';
-
+import '../controller/bin_controller.dart';
+import '../controller/schedule_controller.dart';
 import '../model/bin.dart';
+import 'bin_register.dart';
+import 'bin_update.dart';
 import 'detailed_status.dart';
 
 class BinPage extends StatefulWidget {

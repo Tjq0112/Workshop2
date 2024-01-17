@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../controller/bin_controller.dart';
 import 'bin_map.dart';
+
 class DetailedStatusPage extends StatefulWidget {
   final int index;
 
@@ -15,6 +16,7 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
   final BinPageController _newBinController = BinPageController();
   dynamic temperature;
   dynamic weight;
+  dynamic full;
   late Timer timer;
 
   @override
@@ -27,12 +29,33 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
           setState(() {
             temperature = resultT;
           });
+          double temperatureT = double.parse(temperature);
+          if(temperatureT>=40)
+          {
+            _newBinController.SendNotificationTemperature();
+          }
+        });
 
-          _newBinController.getJsonDataW().then((resultW) {
-            setState(() {
-              weight = resultW;
-            });
+        _newBinController.getJsonDataW().then((resultW) {
+          setState(() {
+            weight = resultW;
           });
+          double weightW = double.parse(weight);
+          if(weightW>=5000)
+          {
+            _newBinController.SendNotificationWeight();
+          }
+        });
+
+        _newBinController.getJsonDataF().then((resultF) {
+          setState(() {
+            full = resultF;
+          });
+          double fullF = double.parse(full);
+          if(fullF<=2)
+          {
+            _newBinController.SendNotificationFull();
+          }
         });
       }
     });
@@ -50,15 +73,15 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Bin Status'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.lightGreen,
       ),
-      backgroundColor: Colors.greenAccent,
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
           buildCard(Icons.location_on, 'Location',
-              'Fakulti Teknologi Maklumat dan Komu'),
-          buildCard(Icons.restore_from_trash, 'Full Level', '20 (cm)'),
+              'FTMK'),
+          buildCard(Icons.restore_from_trash, 'Full Level',
+              '${full ?? _newBinController.getJsonDataF()}(cm)'),
           buildCard(Icons.scale_outlined, 'Weight Level',
               '${weight ?? _newBinController.getJsonDataW()} (g)'),
           buildCard(Icons.local_fire_department, 'Temperature Level',

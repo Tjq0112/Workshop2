@@ -12,11 +12,29 @@ import 'package:mockapp/Driver/Pages/settings.dart';
 import 'package:mockapp/api/firebase_api.dart';
 import 'package:mockapp/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
+  //Remove this method to stop OneSignal Debugging
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.Debug.setAlertLevel(OSLogLevel.none);
+  
+
+  OneSignal.initialize("3ca1eddc-83b8-4c20-84da-41906c958cb6");
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS
+// or Android push notification prompt. We recommend removing the following
+// code and instead using an In-App Message to prompt for notification permission
+  OneSignal.Notifications.requestPermission(true);
+  OneSignal.Notifications.addPermissionObserver((state) {
+    print ("Has permission " + state.toString());
+  });
+  
+  OneSignal.login("Playanator");
+  
   runApp(MyApp());
 }
 

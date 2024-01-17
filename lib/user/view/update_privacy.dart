@@ -91,8 +91,8 @@ class _UpdatePrivacyPage extends State<UpdatePrivacyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Smart Waste'),
-        backgroundColor: Colors.lightGreen,
+          centerTitle: true,
+          title: Image.asset('assets/wastewise.png', height: 45)
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

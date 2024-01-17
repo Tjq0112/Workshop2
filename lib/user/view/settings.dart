@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mockapp/Driver/Pages/about.dart';
+import 'package:mockapp/Driver/Pages/intro.dart';
 import 'package:mockapp/user/controller/user_controller.dart';
 import 'package:mockapp/user/view/update_privacy.dart';
 import 'package:mockapp/user/view/update_profile.dart';
@@ -44,8 +46,10 @@ class _SettingsPage extends State<SettingsPage> {
             title: Text('About'),
             leading: Icon(Icons.info),
             onTap: () {
-              // Handle about page
-              print('About tapped');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AboutUsPage()));
             },
           ),
           Divider(),
@@ -59,7 +63,7 @@ class _SettingsPage extends State<SettingsPage> {
                 ),
               );
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => LoginPage(),
+                builder: (context) => IntroPage(),
               ));
             },
           ),

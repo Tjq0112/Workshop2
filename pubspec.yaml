@@ -48,7 +48,7 @@ dependencies:
   google_fonts: ^6.1.0
   logger: ^2.0.2+1
   marquee: ^2.2.3
-
+  onesignal_flutter: ^5.0.4
 
 
   # The following adds the Cupertino Icons font to your application.

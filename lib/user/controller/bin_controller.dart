@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '../model/bin.dart';
-//import 'package:firebase_service/firebase_service.dart';
 import 'package:http/http.dart' as http;
 
 class BinPageController {
@@ -222,6 +222,84 @@ class BinPageController {
       print("Error fetching data: $e");
     }
     return full;
+  }
+
+  Future<void> SendNotificationTemperature() async{
+    var header = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Basic ZWE3ZTBhM2EtZGIxYy00ZDM0LThjMzMtMjRiODM0ODk2MWFj'
+    };
+
+    var request = {
+      'app_id': '3ca1eddc-83b8-4c20-84da-41906c958cb6',
+      'include_external_user_ids': ['playanator'],
+      'headings': {'en': 'Waste Wise'},
+      'contents': {'en': 'Caution: Bin temperature exceeds safe limit'}
+    };
+
+    var response = await http.post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: header,
+      body: json.encode(request),
+    );
+
+    if (response.statusCode == 200) {
+      print("Notification sent successfully.");
+    } else {
+      print("Failed to send notification. Status code: ${response.statusCode}");
+    }
+  }
+
+  Future<void> SendNotificationWeight() async{
+    var header = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Basic ZWE3ZTBhM2EtZGIxYy00ZDM0LThjMzMtMjRiODM0ODk2MWFj'
+    };
+
+    var request = {
+      'app_id': '3ca1eddc-83b8-4c20-84da-41906c958cb6',
+      'include_external_user_ids': ['playanator'],
+      'headings': {'en': 'Waste Wise'},
+      'contents': {'en': 'Weight Limit Alert: Bin is too heavy.'}
+    };
+
+    var response = await http.post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: header,
+      body: json.encode(request),
+    );
+
+    if (response.statusCode == 200) {
+      print("Notification sent successfully.");
+    } else {
+      print("Failed to send notification. Status code: ${response.statusCode}");
+    }
+  }
+
+  Future<void> SendNotificationFull() async{
+    var header = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Basic ZWE3ZTBhM2EtZGIxYy00ZDM0LThjMzMtMjRiODM0ODk2MWFj'
+    };
+
+    var request = {
+      'app_id': '3ca1eddc-83b8-4c20-84da-41906c958cb6',
+      'include_external_user_ids': ['playanator'],
+      'headings': {'en': 'Waste Wise'},
+      'contents': {'en': 'Full Bin Warning: Please empty the bin'}
+    };
+
+    var response = await http.post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: header,
+      body: json.encode(request),
+    );
+
+    if (response.statusCode == 200) {
+      print("Notification sent successfully.");
+    } else {
+      print("Failed to send notification. Status code: ${response.statusCode}");
+    }
   }
 
 }

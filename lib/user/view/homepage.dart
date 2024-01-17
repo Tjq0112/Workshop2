@@ -35,8 +35,8 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
-        title: const Text('Waste Wise'),
+          centerTitle: true,
+          title: Image.asset('assets/wastewise.png', height: 45)
 
       ),
       body: Center(
