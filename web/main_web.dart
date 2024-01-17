@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mockapp/pages/map_page.dart'; // Import your MapPage file
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mockapp/admin/Menu.dart';
+import 'package:mockapp/admin/Login.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
 
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
-            return MapPage();
+            return LoginScreen();
           }
 
           // Otherwise, show something whilst waiting for initialization to complete
