@@ -23,16 +23,19 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
   void initState() {
     super.initState();
 
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (mounted) {
+    int notificationCounter = 0;
+    const int maxNotifications = 3;
+
+    timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      if (mounted && notificationCounter < maxNotifications) {
         _newBinController.getJsonDataT().then((resultT) {
           setState(() {
             temperature = resultT;
           });
           double temperatureT = double.parse(temperature);
-          if(temperatureT>=40)
-          {
+          if (temperatureT >= 40) {
             _newBinController.SendNotificationTemperature();
+            notificationCounter++;
           }
         });
 
@@ -41,9 +44,9 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
             weight = resultW;
           });
           double weightW = double.parse(weight);
-          if(weightW>=5000)
-          {
+          if (weightW >= 5000) {
             _newBinController.SendNotificationWeight();
+            notificationCounter++;
           }
         });
 
@@ -52,18 +55,23 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
             full = resultF;
           });
           double fullF = double.parse(full);
-          if(fullF<=2)
-          {
+          if (fullF <= 2) {
             _newBinController.SendNotificationFull();
+            notificationCounter++;
           }
         });
+
+        // Check if we've reached the maximum number of notifications (3 times)
+        if (notificationCounter >= maxNotifications) {
+          timer.cancel(); // Stop the timer after 3 notifications
+        }
       }
     });
   }
 
   @override
   void dispose() {
-    timer.cancel();
+    timer.cancel(); // Make sure to cancel the timer when the widget is disposed
     super.dispose();
   }
 
