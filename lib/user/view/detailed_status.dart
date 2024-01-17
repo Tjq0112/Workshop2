@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
 import '../controller/bin_controller.dart';
 import 'bin_map.dart';
 class DetailedStatusPage extends StatefulWidget {
@@ -16,7 +15,6 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
   final BinPageController _newBinController = BinPageController();
   dynamic temperature;
   dynamic weight;
-  dynamic full;
   late Timer timer;
 
   @override
@@ -29,17 +27,11 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
           setState(() {
             temperature = resultT;
           });
-        });
 
-        _newBinController.getJsonDataW().then((resultW) {
-          setState(() {
-            weight = resultW;
-          });
-        });
-
-        _newBinController.getJsonDataF().then((resultF) {
-          setState(() {
-            full = resultF;
+          _newBinController.getJsonDataW().then((resultW) {
+            setState(() {
+              weight = resultW;
+            });
           });
         });
       }
@@ -58,15 +50,15 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Bin Status'),
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.green,
       ),
+      backgroundColor: Colors.greenAccent,
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
           buildCard(Icons.location_on, 'Location',
-              'Fakulti Teknologi Maklumat dan Komunikasi (FTMK) UTeM'),
-          buildCard(Icons.restore_from_trash, 'Full Level',
-              '${full ?? _newBinController.getJsonDataF()}(cm)'),
+              'Fakulti Teknologi Maklumat dan Komu'),
+          buildCard(Icons.restore_from_trash, 'Full Level', '20 (cm)'),
           buildCard(Icons.scale_outlined, 'Weight Level',
               '${weight ?? _newBinController.getJsonDataW()} (g)'),
           buildCard(Icons.local_fire_department, 'Temperature Level',
@@ -106,23 +98,7 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  // Wrap the Text widget with Marquee for the 'Location' card
-                  title == 'Location'
-                      ? Marquee(
-                    text: subtitle,
-                    style: TextStyle(fontSize: 16),
-                    scrollAxis: Axis.horizontal,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    blankSpace: 20.0,
-                    velocity: 30.0,
-                    pauseAfterRound: Duration(seconds: 1),
-                    startPadding: 10.0,
-                    accelerationDuration: Duration(seconds: 1),
-                    accelerationCurve: Curves.linear,
-                    decelerationDuration: Duration(milliseconds: 500),
-                    decelerationCurve: Curves.easeOut,
-                  )
-                      : Text(
+                  Text(
                     subtitle,
                     style: TextStyle(fontSize: 16),
                   ),
