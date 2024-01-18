@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "339922420964",
+    "project_id": "workshop-2-26086",
+    "storage_bucket": "workshop-2-26086.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339922420964:android:b6770ce65dfce0998e18f1",
+        "android_client_info": {
+          "package_name": "com.example.mockapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUqyOYlX75HTRI7L6tKeOCpLWblh24MI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
