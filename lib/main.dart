@@ -17,6 +17,25 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
+<<<<<<< Updated upstream
+=======
+  //Remove this method to stop OneSignal Debugging
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  //OneSignal.Debug.setAlertLevel(OSLogLevel.none);
+
+  OneSignal.initialize('ec05b741-3726-41eb-bf5f-ad907dd214eb');
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS
+// or Android push notification prompt. We recommend removing the following
+// code and instead using an In-App Message to prompt for notification permission
+  OneSignal.Notifications.requestPermission(true);
+  /*OneSignal.Notifications.addPermissionObserver((state) {
+    print ("Has permission " + state.toString());
+  });*/
+  
+  OneSignal.login('apple');
+  
+>>>>>>> Stashed changes
   runApp(MyApp());
 }
 

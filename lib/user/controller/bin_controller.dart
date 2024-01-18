@@ -224,4 +224,85 @@ class BinPageController {
     return full;
   }
 
+<<<<<<< Updated upstream
+=======
+  Future<void> SendNotificationTemperature() async{
+    var header = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Basic MTc1ZTEyNTMtNjFmZS00YTc1LTkyM2EtZjQ0Y2MwMmM5ZDBl'
+    };
+
+    var request = {
+      'app_id': 'ec05b741-3726-41eb-bf5f-ad907dd214eb',
+      'include_external_user_ids': ['apple'],
+      'headings': {'en': 'Waste Wise'},
+      'contents': {'en': 'Caution: Bin temperature exceeds safe limit'}
+    };
+
+    var response = await http.post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: header,
+      body: json.encode(request),
+    );
+
+    if (response.statusCode == 200) {
+      print("Notification sent successfully.");
+    } else {
+      print("Failed to send notification. Status code: ${response.statusCode}");
+    }
+  }
+
+  Future<void> SendNotificationWeight() async{
+    var header = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Basic MTc1ZTEyNTMtNjFmZS00YTc1LTkyM2EtZjQ0Y2MwMmM5ZDBl'
+    };
+
+    var request = {
+      'app_id': 'ec05b741-3726-41eb-bf5f-ad907dd214eb',
+      'include_external_user_ids': ['apple'],
+      'headings': {'en': 'Waste Wise'},
+      'contents': {'en': 'Weight Limit Alert: Bin is too heavy.'}
+    };
+
+    var response = await http.post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: header,
+      body: json.encode(request),
+    );
+
+    if (response.statusCode == 200) {
+      print("Notification sent successfully.");
+    } else {
+      print("Failed to send notification. Status code: ${response.statusCode}");
+    }
+  }
+
+  Future<void> SendNotificationFull() async{
+    var header = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Basic MTc1ZTEyNTMtNjFmZS00YTc1LTkyM2EtZjQ0Y2MwMmM5ZDBl'
+    };
+
+    var request = {
+      'app_id': 'ec05b741-3726-41eb-bf5f-ad907dd214eb',
+      'include_external_user_ids': ['apple'],
+      'headings': {'en': 'Waste Wise'},
+      'contents': {'en': 'Full Bin Warning: Please empty the bin'}
+    };
+
+    var response = await http.post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: header,
+      body: json.encode(request),
+    );
+
+    if (response.statusCode == 200) {
+      print("Notification sent successfully.");
+    } else {
+      print("Failed to send notification. Status code: ${response.statusCode}");
+    }
+  }
+
+>>>>>>> Stashed changes
 }
