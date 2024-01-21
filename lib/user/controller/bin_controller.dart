@@ -224,8 +224,6 @@ class BinPageController {
     return full;
   }
 
-<<<<<<< Updated upstream
-=======
   Future<void> SendNotificationTemperature() async{
     var header = {
       'Content-Type': 'application/json; charset=utf-8',
@@ -304,5 +302,4 @@ class BinPageController {
     }
   }
 
->>>>>>> Stashed changes
 }

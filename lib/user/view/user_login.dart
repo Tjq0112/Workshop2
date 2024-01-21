@@ -26,17 +26,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       //backgroundColor: Colors.lightGreen.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
-        title: Text(
-          'WASTE WISE',
-          /* style: GoogleFonts.palanquinDark(
-            textStyle: TextStyle(
-              fontSize: 40, // Adjust the font size as needed
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),*/
-        ),
+          centerTitle: true,
+          title: Image.asset('assets/wastewise.png', height: 45)
       ),
 
       body: SafeArea(
@@ -171,20 +162,6 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         color: Colors.black,
                       )),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // nanti ubah page
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => UserRegisterView()));
-                  },
-                  child: Text(
-                    "Forgot Password? Reset here.",
-                    style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.bold),
-                  ),
                 ),
                 GestureDetector(
                   onTap: () {

@@ -12,13 +12,13 @@ import 'package:mockapp/Driver/Pages/settings.dart';
 import 'package:mockapp/api/firebase_api.dart';
 import 'package:mockapp/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
-<<<<<<< Updated upstream
-=======
+
   //Remove this method to stop OneSignal Debugging
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
   //OneSignal.Debug.setAlertLevel(OSLogLevel.none);
@@ -34,8 +34,7 @@ void main() async {
   });*/
   
   OneSignal.login('apple');
-  
->>>>>>> Stashed changes
+
   runApp(MyApp());
 }
 
@@ -43,9 +42,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.lightGreen,
         textTheme: GoogleFonts.latoTextTheme(),
+
       ),
       home: IntroPage(),
     );

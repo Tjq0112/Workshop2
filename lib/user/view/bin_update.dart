@@ -22,7 +22,8 @@ class _BinUpdatePage extends State<BinUpdatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Bin Alias'),
+          centerTitle: true,
+          title: Image.asset('assets/wastewise.png', height: 45)
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),

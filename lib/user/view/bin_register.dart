@@ -66,7 +66,8 @@ class _BinRegisterPage extends State<BinRegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register New Bin'),
+          centerTitle: true,
+          title: Image.asset('assets/wastewise.png', height: 45)
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),

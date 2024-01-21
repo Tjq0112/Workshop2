@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../controller/bin_controller.dart';
 import 'bin_map.dart';
+
+
 class DetailedStatusPage extends StatefulWidget {
   final int index;
 
@@ -15,34 +17,65 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
   final BinPageController _newBinController = BinPageController();
   dynamic temperature;
   dynamic weight;
+  dynamic full;
   late Timer timer;
 
   @override
   void initState() {
     super.initState();
 
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (mounted) {
+    int notificationCounter = 0;
+    const int maxNotifications = 3;
+
+    timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      if (mounted && notificationCounter < maxNotifications) {
         _newBinController.getJsonDataT().then((resultT) {
           setState(() {
             temperature = resultT;
           });
-
-          _newBinController.getJsonDataW().then((resultW) {
-            setState(() {
-              weight = resultW;
-            });
-          });
+          double temperatureT = double.parse(temperature);
+          if (temperatureT >= 46) {
+            _newBinController.SendNotificationTemperature();
+            notificationCounter++;
+          }
         });
+
+        _newBinController.getJsonDataW().then((resultW) {
+          setState(() {
+            weight = resultW;
+          });
+          double weightW = double.parse(weight);
+          if (weightW >= 5000) {
+            _newBinController.SendNotificationWeight();
+            notificationCounter++;
+          }
+        });
+
+        _newBinController.getJsonDataF().then((resultF) {
+          setState(() {
+            full = resultF;
+          });
+          double fullF = double.parse(full);
+          if (fullF <= 2) {
+            _newBinController.SendNotificationFull();
+            notificationCounter++;
+          }
+        });
+
+        // Check if we've reached the maximum number of notifications (3 times)
+        if (notificationCounter >= maxNotifications) {
+          timer.cancel(); // Stop the timer after 3 notifications
+        }
       }
     });
   }
 
   @override
   void dispose() {
-    timer.cancel();
+    timer.cancel(); // Make sure to cancel the timer when the widget is disposed
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +83,15 @@ class _DetailedStatusPageState extends State<DetailedStatusPage> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Bin Status'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.lightGreen,
       ),
-      backgroundColor: Colors.greenAccent,
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
           buildCard(Icons.location_on, 'Location',
-              'Fakulti Teknologi Maklumat dan Komu'),
-          buildCard(Icons.restore_from_trash, 'Full Level', '20 (cm)'),
+              'FTMK'),
+          buildCard(Icons.restore_from_trash, 'Full Level',
+              '${full ?? _newBinController.getJsonDataF()}(cm)'),
           buildCard(Icons.scale_outlined, 'Weight Level',
               '${weight ?? _newBinController.getJsonDataW()} (g)'),
           buildCard(Icons.local_fire_department, 'Temperature Level',
