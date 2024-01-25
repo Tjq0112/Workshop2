@@ -3,6 +3,7 @@ import 'package:mockapp/admin/Schedule.dart';
 import 'package:flutter/material.dart';
 
 import 'Driver.dart';
+import 'Fixed.dart';
 import 'ManageDriver.dart';
 import 'Setting.dart';
 import 'package:mockapp/pages/map_page.dart';
@@ -44,19 +45,30 @@ class _MenuState extends State<Menu> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Schedule(
-                                  username: username, password: password)),
+                              builder: (context) => Fixed(username: username,password: password)
+                          ),
                         );
                       },
-                      child: const MenuAcceleratorLabel('&Schedule'),
+                      child: const MenuAcceleratorLabel('&Fixed'),
                     ),
                     MenuItemButton(
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ManageDriver(
-                                  username: username, password: password)),
+                              builder: (context) => Schedule(username: username,password: password)
+                          ),
+                        );
+                      },
+                      child: const MenuAcceleratorLabel('&Demand'),
+                    ),
+                    MenuItemButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ManageDriver(username: username,password: password)
+                          ),
                         );
                       },
                       child: const MenuAcceleratorLabel('&Manage Driver'),
@@ -66,8 +78,8 @@ class _MenuState extends State<Menu> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  Driver(username: username, password: password)),
+                              builder: (context) => Driver(username: username,password: password)
+                          ),
                         );
                       },
                       child: const MenuAcceleratorLabel('&Add Driver'),
@@ -86,8 +98,8 @@ class _MenuState extends State<Menu> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  Setting(username: username, password: password)),
+                              builder: (context) => Setting(username: username,password: password)
+                          ),
                         );
                       },
                       child: const MenuAcceleratorLabel('Setting'),
@@ -104,9 +116,9 @@ class _MenuState extends State<Menu> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()),
-                                );
-                              },
+                                      builder: (context) => LoginScreen()
+                                  ),
+                                );},
                               child: const Text('Sure'),
                             ),
                             TextButton(
@@ -119,14 +131,16 @@ class _MenuState extends State<Menu> {
                       child: const MenuAcceleratorLabel('&Logout'),
                     ),
                   ],
+
                 ),
+
               ),
             ],
           ),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Image.asset('assets/wasteCollect.png'),
+              child: Image.asset('assets/wasteCollect1.png'),
             ),
           )
         ],

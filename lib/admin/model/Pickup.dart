@@ -4,13 +4,15 @@ class Pickup{
   String date;
   bool status;
   String driver_Id;
+  String type;
 
   Pickup({
-    required this.id,
+    this.id = " ",
     required this.bin_Id,
     required this.date,
     required this.status,
-    required this.driver_Id
+    required this.driver_Id,
+    required this.type
   });
 
   static Pickup fromJson(Map<String, dynamic> json) => Pickup(
@@ -19,6 +21,7 @@ class Pickup{
       date: json['date'],
       status: json['status'],
       driver_Id: json['driver_Id'],
+    type: json['type']
   );
 
   Map<String, dynamic> toJson() => {
@@ -27,5 +30,6 @@ class Pickup{
     'date': date,
     'status': status,
     'driver_Id': driver_Id,
+    'type' : type
   };
 }

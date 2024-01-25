@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:mockapp/admin/model/bin.dart';
 import 'Driver.dart';
+import 'Fixed.dart';
 import 'Login.dart';
 import 'ManageDriver.dart';
 import 'Setting.dart';
@@ -52,11 +53,22 @@ class _ScheduleState extends State<Schedule> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
+                                builder: (context) => Fixed(username: username,password: password)
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&Fixed'),
+                      ),
+                      MenuItemButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
                                 builder: (context) => Schedule(username: username,password: password)
                             ),
                           );
                         },
-                        child: const MenuAcceleratorLabel('&Schedule'),
+                        child: const MenuAcceleratorLabel('&Demand'),
                       ),
                       MenuItemButton(
                         onPressed: () {
@@ -326,6 +338,12 @@ class _ScheduleState extends State<Schedule> {
                 )
             );
           },
+          shape: Border(
+              top: BorderSide(),
+              bottom: BorderSide(),
+              left: BorderSide(),
+              right: BorderSide()
+          ),
         );
 
   }

@@ -4,6 +4,7 @@ class Schedule{
   bool status;
   String driver_Id;
   String bin_Id;
+  String type;
 
 
   Schedule({
@@ -11,7 +12,8 @@ class Schedule{
     required this.date,
     required this.status,
     required this.driver_Id,
-    required this.bin_Id
+    required this.bin_Id,
+    required this.type
   });
 
   // Named constructor to create a Bin instance from a JSON object
@@ -22,6 +24,7 @@ class Schedule{
       status: json['status'] ?? '',
       driver_Id: json['driver_Id'] ?? '',
       bin_Id: json['bin_Id'] ?? '',
+      type: json['type'] ?? '',
     );
   }
 
@@ -30,6 +33,7 @@ class Schedule{
     'date' : date,
     'status' : status,
     'driver_Id' : driver_Id,
-    'bin_Id' : bin_Id
+    'bin_Id' : bin_Id,
+    'type' : type
   };
 }

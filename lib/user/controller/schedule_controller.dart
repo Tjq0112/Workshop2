@@ -11,7 +11,8 @@ class SchedulePageController {
     required bool status,
     required String id,
     required String driver_Id,
-    required String bin_Id
+    required String bin_Id,
+    required String type
   }) async {
     // Create user id with auto increment
     try {
@@ -69,7 +70,8 @@ class SchedulePageController {
           date: date,
           status: status,
           driver_Id: driver_Id,
-          bin_Id: bin_Id
+          bin_Id: bin_Id,
+          type: type
       );
 
       // Set the desired path of a collection

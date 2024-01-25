@@ -2,6 +2,7 @@ import 'package:mockapp/admin/model/driver1.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'Fixed.dart';
 import 'Login.dart';
 import 'ManageDriver.dart';
 import 'Schedule.dart';
@@ -50,11 +51,22 @@ class _DriverState extends State<Driver> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
+                                builder: (context) => Fixed(username: username,password: password)
+                            ),
+                          );
+                        },
+                        child: const MenuAcceleratorLabel('&Fixed'),
+                      ),
+                      MenuItemButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
                                 builder: (context) => Schedule(username: username,password: password)
                             ),
                           );
                         },
-                        child: const MenuAcceleratorLabel('&Schedule'),
+                        child: const MenuAcceleratorLabel('&Demand'),
                       ),
                       MenuItemButton(
                         onPressed: () {

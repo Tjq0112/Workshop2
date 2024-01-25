@@ -164,6 +164,7 @@ class _BinPage extends State<BinPage> {
                                         id: scheduleId,
                                         driver_Id: " ",
                                         bin_Id: bin.bin_id,
+                                        type: "Demand",
                                       );
                                     },
                                   ),

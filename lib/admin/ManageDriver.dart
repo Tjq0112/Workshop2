@@ -2,6 +2,7 @@ import 'package:mockapp/admin/model/driver1.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'Driver.dart';
+import 'Fixed.dart';
 import 'Login.dart';
 import 'Schedule.dart';
 import 'Setting.dart';
@@ -42,11 +43,22 @@ class _ManageDriverState extends State<ManageDriver> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
+                              builder: (context) => Fixed(username: username,password: password)
+                          ),
+                        );
+                      },
+                      child: const MenuAcceleratorLabel('&Fixed'),
+                    ),
+                    MenuItemButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
                               builder: (context) => Schedule(username: username,password: password)
                           ),
                         );
                       },
-                      child: const MenuAcceleratorLabel('&Schedule'),
+                      child: const MenuAcceleratorLabel('&Demand'),
                     ),
                     MenuItemButton(
                       onPressed: () {
@@ -183,7 +195,13 @@ class _ManageDriverState extends State<ManageDriver> {
               });
             }
           },
-          icon: driver1.d_active ? Icon(Icons.check_circle) : Icon(Icons.check_circle_outline))
+          icon: driver1.d_active ? Icon(Icons.check_circle) : Icon(Icons.check_circle_outline)),
+        shape: Border(
+          top: BorderSide(),
+          bottom: BorderSide(),
+          left: BorderSide(),
+          right: BorderSide()
+        ),
     );
   }
 }
